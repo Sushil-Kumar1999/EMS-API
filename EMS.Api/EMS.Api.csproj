@@ -35,4 +35,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EMS.Core.Application\EMS.Core.Application.csproj" />
+    <ProjectReference Include="..\EMS.Persistence.EntityFrameworkCore\EMS.Persistence.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
 </Project>
