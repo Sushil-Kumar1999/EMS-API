@@ -8,5 +8,9 @@ namespace EMS.Core.Application.Infrastructure.Persistence
 {
     public interface IUnitOfWork
     {
+        //Task CommitAsync();
+        //Task SaveChangesAsync();
+        void Rollback();
+        T Clone<T>(T entity);
     }
 }

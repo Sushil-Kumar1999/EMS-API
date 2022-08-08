@@ -25,23 +25,17 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                .WithOne()
                .HasForeignKey<Volunteer>(b => b.UserId);
 
-            modelBuilder.Entity<EventVolunteer>()
-               .HasKey(ev => new { ev.EventId, ev.VolunteerId });
-
-            modelBuilder.Entity<EventVolunteer>()
-                .HasOne(ev => ev.Event)
-                .WithMany(e => e.SelectedVolunteers);
-
-            modelBuilder.Entity<EventVolunteer>()
-                .HasOne(ev => ev.Volunteer)
-                .WithMany(e => e.EventsAttended);
-
             SeedDatabase(modelBuilder);
         }
 
         private static void SeedDatabase(ModelBuilder modelBuilder)
         {
-            modelBuilder.SeedAdminAndRoles();
+            // order of seeding is important - don't change
+
+            modelBuilder.SeedIdentityRoles();
+            modelBuilder.SeedApplicationUsers();
+            modelBuilder.SeedIdentityUserRoles();
+            modelBuilder.SeedEventsAndVolunteers();
         }
     }
 }

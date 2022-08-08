@@ -4,14 +4,16 @@ using EMS.Persistence.EntityFrameworkCore.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EMS.Persistence.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(EMSDbContext))]
-    partial class EMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220808110528_ManytoMany")]
+    partial class ManytoMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,15 +123,15 @@ namespace EMS.Persistence.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("EventVolunteer", b =>
                 {
-                    b.Property<long>("EventsId")
+                    b.Property<long>("EventsAttendedId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("VolunteersId")
+                    b.Property<long>("SelectedVolunteersId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("EventsId", "VolunteersId");
+                    b.HasKey("EventsAttendedId", "SelectedVolunteersId");
 
-                    b.HasIndex("VolunteersId");
+                    b.HasIndex("SelectedVolunteersId");
 
                     b.ToTable("EventVolunteer");
                 });
@@ -545,13 +547,13 @@ namespace EMS.Persistence.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("EMS.Core.Application.Domain.Event", null)
                         .WithMany()
-                        .HasForeignKey("EventsId")
+                        .HasForeignKey("EventsAttendedId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EMS.Core.Application.Domain.Volunteer", null)
                         .WithMany()
-                        .HasForeignKey("VolunteersId")
+                        .HasForeignKey("SelectedVolunteersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

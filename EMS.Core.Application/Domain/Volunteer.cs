@@ -11,6 +11,7 @@ namespace EMS.Core.Application.Domain
         public long Age { get; set; } // years
         public double Height { get; set; } // cm
         public double Weight { get; set; } // Kgs
-        public ICollection<EventVolunteer> EventsAttended { get; set; }
+        // events attended by volunteer
+        public ICollection<Event> Events { get; set; } 
     }
 }
