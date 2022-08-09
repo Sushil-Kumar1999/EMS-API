@@ -1,4 +1,5 @@
 ﻿using EMS.Core.Application.Domain.Base.Models;
+using EMS.Core.Application.Domain.Users;
 using System;
 using System.Collections.Generic;
 

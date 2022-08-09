@@ -1,13 +1,15 @@
 ﻿using Autofac;
 using EMS.Core.Application.Assemblers;
+using EMS.Core.Application.Infrastructure.Persistence;
+using EMS.Core.Application.Infrastructure.Security;
 using EMS.Persistence.EntityFrameworkCore;
+using EMS.Security.Jwt;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace EMS.Api.Registrations
 {
@@ -18,8 +20,7 @@ namespace EMS.Api.Registrations
 
         public static void RegisterServices(this ContainerBuilder builder)
         {
-
-            //Mediator -> Searches for Commands and Queries and registers them.
+            // Mediator -> Searches for Commands and Queries and registers them.
             builder.RegisterMediatR(CoreAssembly, PersistenceAssembly);
             //builder.RegisterGeneric(typeof(ValidationBehaviour<,>)).As(typeof(IPipelineBehavior<,>));
 
@@ -29,6 +30,22 @@ namespace EMS.Api.Registrations
                 .Where(t => t.Name.EndsWith("Service"))
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
+
+            // Managers
+            builder.RegisterType<TokenManager>().As<ITokenManager>().InstancePerLifetimeScope();
+        }
+
+        public static void RegisterPersistence(this ContainerBuilder builder)
+        {
+            // Repositories
+            //builder.RegisterAssemblyTypes(PersistenceAssembly)
+            //    .PublicOnly()
+            //    .Where(t => t.Name.EndsWith("Repository"))
+            //    .AsImplementedInterfaces()
+            //    .InstancePerLifetimeScope();
+
+            // Units of work
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerDependency();
         }
 
     }

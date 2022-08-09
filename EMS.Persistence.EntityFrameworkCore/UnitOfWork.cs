@@ -2,6 +2,7 @@
 using EMS.Persistence.EntityFrameworkCore.DataAccess;
 using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 
 namespace EMS.Persistence.EntityFrameworkCore
 {
@@ -13,6 +14,16 @@ namespace EMS.Persistence.EntityFrameworkCore
         {
             _context = context;
             _context.Database.BeginTransaction();
+        }
+
+        public async Task CommitAsync()
+        {
+            await _context.Database.CommitTransactionAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+           //await _context.Database.Sa
         }
 
         public void Rollback() => _context.Database.RollbackTransaction();

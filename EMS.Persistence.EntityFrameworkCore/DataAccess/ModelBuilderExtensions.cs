@@ -182,7 +182,6 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                     Id = 1,
                     Name = "New Miracle Experiment",
                     CreatedById = Guid.Parse(OrganiserId),
-                    UpdatedById = Guid.Parse(OrganiserId),
                     StartDate = new DateTime(2022, 6, 8, 9, 0, 0),
                     EndDate = new DateTime(2022, 6, 8, 17, 0, 0)
                 },
@@ -191,7 +190,6 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                     Id = 2,
                     Name = "Revolutionary study",
                     CreatedById = Guid.Parse(OrganiserId),
-                    UpdatedById = Guid.Parse(OrganiserId),
                     StartDate = new DateTime(2022, 6, 10, 9, 0, 0),
                     EndDate = new DateTime(2022, 8, 10, 17, 0, 0)
                 }

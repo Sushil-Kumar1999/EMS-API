@@ -32,7 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EMS.Adapters.Security\EMS.Security.Jwt.csproj" />
     <ProjectReference Include="..\EMS.Core.Application\EMS.Core.Application.csproj" />
+    <ProjectReference Include="..\EMS.Core.DataTransfer\EMS.Core.DataTransfer.csproj" />
     <ProjectReference Include="..\EMS.Persistence.EntityFrameworkCore\EMS.Persistence.EntityFrameworkCore.csproj" />
   </ItemGroup>
 

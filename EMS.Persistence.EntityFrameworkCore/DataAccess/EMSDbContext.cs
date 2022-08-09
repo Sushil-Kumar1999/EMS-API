@@ -1,4 +1,5 @@
 ﻿using EMS.Core.Application.Domain;
+using EMS.Core.Application.Domain.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

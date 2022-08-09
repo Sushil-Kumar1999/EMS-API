@@ -1,6 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using EMS.Api.Registrations;
 using EMS.Core.Application.Domain.Users;
+using EMS.Core.Application.Infrastructure.Security;
 using EMS.Persistence.EntityFrameworkCore.DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -15,7 +17,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
 using System.Text;
 
 namespace EMS.Api
@@ -37,9 +38,6 @@ namespace EMS.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -61,31 +59,36 @@ namespace EMS.Api
                 options.AllowSynchronousIO = true;
             });
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-                options.Password.RequiredLength = 4;
-                options.Lockout.MaxFailedAccessAttempts = int.Parse(Configuration["AuthSettings:Lockout_MaxFailedAccessAttempts"]);
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(int.Parse(Configuration["AuthSettings:Lockout_DurationInMinutes"]));
-            }).AddEntityFrameworkStores<EMSDbContext>()
-              .AddDefaultTokenProviders();
+            services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
 
             services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
+            })
+            .AddJwtBearer(options =>
             {
+                options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
-                    ValidIssuer = Configuration["AuthSettings:Issuer"],
-                    ValidateAudience = true,
-                    ValidAudience = Configuration["AuthSettings:Audience"],
+                    ValidateIssuer = false,
+                    //ValidIssuer = Configuration["AuthSettings:Issuer"],
+                    ValidateAudience = false,
+                    //ValidAudience = Configuration["AuthSettings:Audience"],
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["AuthSettings:Key"])),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["JwtConfig:Secret"])),
+                    RequireExpirationTime = false,
+                    ValidateLifetime = false
                 };
             });
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequiredLength = 4;
+            }).AddEntityFrameworkStores<EMSDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,10 +98,10 @@ namespace EMS.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => 
+                app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "EMS.Api v1");
-                    c.RoutePrefix = string.Empty; 
+                    c.RoutePrefix = string.Empty;
                 });
             }
 
@@ -118,6 +121,12 @@ namespace EMS.Api
             });
 
             AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterServices();
+            builder.RegisterPersistence();
         }
     }
 }
