@@ -5,12 +5,12 @@ namespace EMS.Core.Application.Domain.Users.Commands
 {
     public class LoginCommand : IRequest<LoginResponseDto>
     {
-        public LoginCommand(string username, string password)
+        public LoginCommand(string email, string password)
         {
-            Username = username;
+            Email = email;
             Password = password;
         }
-        public string Username { get; }
+        public string Email { get; }
         public string Password { get; }
     }
 }
