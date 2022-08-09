@@ -53,70 +53,6 @@ namespace EMS.Persistence.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Events");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedById = new Guid("2d42b6a9-591b-4178-a4ab-431b3f337fd0"),
-                            CreatedDateUtc = new DateTime(2022, 8, 9, 10, 54, 23, 116, DateTimeKind.Utc).AddTicks(7798),
-                            EndDate = new DateTime(2022, 6, 8, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedDateUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "New Miracle Experiment",
-                            StartDate = new DateTime(2022, 6, 8, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedById = new Guid("2d42b6a9-591b-4178-a4ab-431b3f337fd0"),
-                            CreatedDateUtc = new DateTime(2022, 8, 9, 10, 54, 23, 116, DateTimeKind.Utc).AddTicks(9605),
-                            EndDate = new DateTime(2022, 8, 10, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedDateUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Revolutionary study",
-                            StartDate = new DateTime(2022, 6, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 1
-                        });
-                });
-
-            modelBuilder.Entity("EMS.Core.Application.Domain.Users.Volunteer", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("Age")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDateUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedDateUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("Height")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("ModifiedDateUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
-
-                    b.ToTable("Volunteers");
                 });
 
             modelBuilder.Entity("EventVolunteer", b =>
@@ -124,8 +60,8 @@ namespace EMS.Persistence.EntityFrameworkCore.Migrations
                     b.Property<long>("EventsId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("VolunteersId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("VolunteersId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("EventsId", "VolunteersId");
 
@@ -455,7 +391,25 @@ namespace EMS.Persistence.EntityFrameworkCore.Migrations
                             ModifiedDateUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
                             UpdatedById = new Guid("84ada39a-2521-4e26-94f6-98d7e7a9bdd2")
-                        },
+                        });
+                });
+
+            modelBuilder.Entity("EMS.Core.Application.Domain.Users.Volunteer", b =>
+                {
+                    b.HasBaseType("EMS.Core.Application.Domain.Users.ApplicationUser");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.HasDiscriminator().HasValue("Volunteer");
+
+                    b.HasData(
                         new
                         {
                             Id = "1BE12301-3337-4223-819D-9D36296AC6B9",
@@ -474,7 +428,10 @@ namespace EMS.Persistence.EntityFrameworkCore.Migrations
                             FirstName = "Volunteer1",
                             ModifiedDateUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
-                            UpdatedById = new Guid("84ada39a-2521-4e26-94f6-98d7e7a9bdd2")
+                            UpdatedById = new Guid("84ada39a-2521-4e26-94f6-98d7e7a9bdd2"),
+                            DateOfBirth = new DateTime(2022, 8, 9, 12, 54, 24, 564, DateTimeKind.Utc).AddTicks(706),
+                            Height = 1.0,
+                            Weight = 1.0
                         },
                         new
                         {
@@ -494,7 +451,10 @@ namespace EMS.Persistence.EntityFrameworkCore.Migrations
                             FirstName = "Volunteer2",
                             ModifiedDateUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
-                            UpdatedById = new Guid("84ada39a-2521-4e26-94f6-98d7e7a9bdd2")
+                            UpdatedById = new Guid("84ada39a-2521-4e26-94f6-98d7e7a9bdd2"),
+                            DateOfBirth = new DateTime(2022, 8, 9, 12, 54, 24, 564, DateTimeKind.Utc).AddTicks(3639),
+                            Height = 1.0,
+                            Weight = 1.0
                         },
                         new
                         {
@@ -514,7 +474,10 @@ namespace EMS.Persistence.EntityFrameworkCore.Migrations
                             FirstName = "Volunteer3",
                             ModifiedDateUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
-                            UpdatedById = new Guid("84ada39a-2521-4e26-94f6-98d7e7a9bdd2")
+                            UpdatedById = new Guid("84ada39a-2521-4e26-94f6-98d7e7a9bdd2"),
+                            DateOfBirth = new DateTime(2022, 8, 9, 12, 54, 24, 564, DateTimeKind.Utc).AddTicks(3675),
+                            Height = 1.0,
+                            Weight = 1.0
                         },
                         new
                         {
@@ -534,17 +497,11 @@ namespace EMS.Persistence.EntityFrameworkCore.Migrations
                             FirstName = "Volunteer4",
                             ModifiedDateUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 1,
-                            UpdatedById = new Guid("84ada39a-2521-4e26-94f6-98d7e7a9bdd2")
+                            UpdatedById = new Guid("84ada39a-2521-4e26-94f6-98d7e7a9bdd2"),
+                            DateOfBirth = new DateTime(2022, 8, 9, 12, 54, 24, 564, DateTimeKind.Utc).AddTicks(3698),
+                            Height = 1.0,
+                            Weight = 1.0
                         });
-                });
-
-            modelBuilder.Entity("EMS.Core.Application.Domain.Users.Volunteer", b =>
-                {
-                    b.HasOne("EMS.Core.Application.Domain.Users.ApplicationUser", "User")
-                        .WithOne()
-                        .HasForeignKey("EMS.Core.Application.Domain.Users.Volunteer", "UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EventVolunteer", b =>

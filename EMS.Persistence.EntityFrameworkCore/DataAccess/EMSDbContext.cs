@@ -21,11 +21,6 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(EMSDbContext).Assembly);
 
-            modelBuilder.Entity<Volunteer>()
-               .HasOne(c => c.User)
-               .WithOne()
-               .HasForeignKey<Volunteer>(b => b.UserId);
-
             SeedDatabase(modelBuilder);
         }
 
@@ -35,8 +30,8 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
 
             modelBuilder.SeedIdentityRoles();
             modelBuilder.SeedApplicationUsers();
-            modelBuilder.SeedIdentityUserRoles();
             modelBuilder.SeedEventsAndVolunteers();
+            modelBuilder.SeedIdentityUserRoles();
         }
     }
 }

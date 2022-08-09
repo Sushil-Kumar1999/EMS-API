@@ -12,6 +12,6 @@ namespace EMS.Core.Application.Domain
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         // volunteers selected for event
-        public virtual ICollection<Volunteer> Volunteers { get; set; } 
+        public virtual ICollection<Volunteer> Volunteers { get; set; }
     }
 }

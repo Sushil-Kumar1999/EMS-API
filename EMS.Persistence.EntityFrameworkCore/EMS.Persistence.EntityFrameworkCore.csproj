@@ -19,5 +19,9 @@
   <ItemGroup>
     <ProjectReference Include="..\EMS.Core.Application\EMS.Core.Application.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
 
 </Project>
