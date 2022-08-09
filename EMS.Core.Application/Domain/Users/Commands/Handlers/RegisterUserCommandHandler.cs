@@ -50,6 +50,7 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
                 throw new Exception("Creation of user failed");
             }
 
+            await _userManager.AddToRoleAsync(newUser, request.Role);
             await _uow.CommitAsync();
 
             var token = await _tokenManager.GenerateTokenAsync(newUser);
