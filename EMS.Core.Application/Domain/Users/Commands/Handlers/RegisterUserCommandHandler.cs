@@ -1,4 +1,5 @@
 ﻿using EMS.Core.Application.Infrastructure.Persistence;
+using EMS.Core.Application.Infrastructure.Persistence.Repositories;
 using EMS.Core.Application.Infrastructure.Security;
 using EMS.Core.DataTransfer.Users.DTOs;
 using MediatR;
@@ -16,7 +17,8 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
         private readonly IUnitOfWork _uow;
 
         public RegisterUserCommandHandler(UserManager<ApplicationUser> userManager,
-            ITokenManager tokenManager, IUnitOfWork uow)
+                                          ITokenManager tokenManager,
+                                          IUnitOfWork uow)
         {
             _userManager = userManager;
             _tokenManager = tokenManager;
@@ -47,6 +49,8 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
             {
                 throw new Exception("Creation of user failed");
             }
+
+            await _uow.CommitAsync();
 
             var token = await _tokenManager.GenerateTokenAsync(newUser);
 
