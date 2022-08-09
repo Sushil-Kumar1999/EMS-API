@@ -1,4 +1,5 @@
-﻿using EMS.Core.Application.Infrastructure.Persistence;
+﻿using EMS.Core.Application.Domain.Enums;
+using EMS.Core.Application.Infrastructure.Persistence;
 using EMS.Core.Application.Infrastructure.Persistence.Repositories;
 using EMS.Core.Application.Infrastructure.Security;
 using EMS.Core.DataTransfer.Users.DTOs;
@@ -34,6 +35,42 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
                 throw new Exception("Email already in use");
             }
 
+            ApplicationUser newUser = request.Role == nameof(UserRoles.Volunteer)
+                ? await RegisterNewVolunteer(request)
+                : await RegisterNewNonVolunteer(request);
+
+            await _uow.CommitAsync();
+
+            var token = await _tokenManager.GenerateTokenAsync(newUser);
+
+            return new UserRegistrationResponseDto(token);
+        }
+
+        private async Task<ApplicationUser> RegisterNewVolunteer(RegisterUserCommand request)
+        {
+            var newUser = new Volunteer
+            {
+                EmailConfirmed = true,
+                Email = request.Email,
+                UserName = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName
+            };
+
+            IdentityResult result = await _userManager.CreateAsync(newUser, request.Password);
+
+            if (!result.Succeeded)
+            {
+                throw new Exception("Creation of user failed");
+            }
+
+            await _userManager.AddToRoleAsync(newUser, request.Role);
+
+            return newUser;
+        }
+
+        private async Task<ApplicationUser> RegisterNewNonVolunteer(RegisterUserCommand request)
+        {
             var newUser = new ApplicationUser
             {
                 EmailConfirmed = true,
@@ -45,17 +82,14 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
 
             IdentityResult result = await _userManager.CreateAsync(newUser, request.Password);
 
-            if(!result.Succeeded)
+            if (!result.Succeeded)
             {
                 throw new Exception("Creation of user failed");
             }
 
             await _userManager.AddToRoleAsync(newUser, request.Role);
-            await _uow.CommitAsync();
 
-            var token = await _tokenManager.GenerateTokenAsync(newUser);
-
-            return new UserRegistrationResponseDto(token);
+            return newUser;
         }
     }
 }
