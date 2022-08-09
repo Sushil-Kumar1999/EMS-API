@@ -208,5 +208,15 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
 
             modelBuilder.Entity<Event>().HasData(events);
         }
+
+        public static void SeedEventVolunteerTable(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity("EventVolunteer").HasData(
+                new { EventsId = 1L, VolunteersId = Volunteer1Id },
+                new { EventsId = 1L, VolunteersId = Volunteer2Id },
+                new { EventsId = 2L, VolunteersId = Volunteer3Id },
+                new { EventsId = 2L, VolunteersId = Volunteer4Id }
+            );
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
             modelBuilder.SeedUsers();
             modelBuilder.SeedIdentityUserRoles();
             modelBuilder.SeedEvents();
+            modelBuilder.SeedEventVolunteerTable();
         }
     }
 }
