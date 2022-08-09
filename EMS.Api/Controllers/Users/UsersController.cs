@@ -1,4 +1,5 @@
-﻿using EMS.Core.Application.Domain.Users.Queries;
+﻿using EMS.Core.Application.Domain.Enums;
+using EMS.Core.Application.Domain.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -21,6 +22,7 @@ namespace EMS.Api.Controllers.Users
 
         [HttpGet]
         [Produces("application/json")]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> ListAsync([FromQuery] string role)
         {
             var query = new ListUsersQuery(role);

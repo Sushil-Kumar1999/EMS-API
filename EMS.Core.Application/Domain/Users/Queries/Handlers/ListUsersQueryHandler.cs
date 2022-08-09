@@ -13,25 +13,22 @@ namespace EMS.Core.Application.Domain.Users.Queries.Handlers
 {
     public class ListUsersQueryHandler : IRequestHandler<ListUsersQuery, IEnumerable<UserDto>>
     {
-        private readonly IUnitOfWork _uow;
         private readonly IUserRepository _userRepository;
         private UserManager<ApplicationUser> _userManager;
 
-        public ListUsersQueryHandler(IUnitOfWork uow, 
-            IUserRepository userRepository, UserManager<ApplicationUser> userManager)
+        public ListUsersQueryHandler(IUserRepository userRepository, UserManager<ApplicationUser> userManager)
         {
-            _uow = uow;
             _userRepository = userRepository;
             _userManager = userManager;
         }
 
         public async Task<IEnumerable<UserDto>> Handle(ListUsersQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<ApplicationUser> users = await _userRepository.ListAsync();
+            IEnumerable<ApplicationUser> users = 
+                request.Role == null ? await _userRepository.ListAsync() 
+                                     : await _userManager.GetUsersInRoleAsync(request.Role);
 
-            //_userManager.GetRolesAsync(us)
-
-            var userDtos = users.Select(x => new UserDto(x.Id, x.UserName, x.FirstName, x.LastName, x.Email, ""));
+            var userDtos = users.Select(x => new UserDto(x.Id, x.UserName, x.FirstName, x.LastName, x.Email, request.Role));
 
             return userDtos;
         }
