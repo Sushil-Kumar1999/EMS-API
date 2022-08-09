@@ -18,6 +18,7 @@ namespace EMS.Persistence.EntityFrameworkCore
 
         public async Task CommitAsync()
         {
+            await _context.SaveChangesAsync();
             await _context.Database.CommitTransactionAsync();
         }
 
