@@ -29,9 +29,9 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
             // order of seeding is important - don't change
 
             modelBuilder.SeedIdentityRoles();
-            modelBuilder.SeedApplicationUsers();
-            modelBuilder.SeedEventsAndVolunteers();
+            modelBuilder.SeedUsers();
             modelBuilder.SeedIdentityUserRoles();
+            modelBuilder.SeedEvents();
         }
     }
 }

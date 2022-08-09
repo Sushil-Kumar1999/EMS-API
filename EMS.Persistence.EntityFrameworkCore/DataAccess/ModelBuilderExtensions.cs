@@ -46,7 +46,7 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                 });
         }
 
-        public static void SeedApplicationUsers(this ModelBuilder modelBuilder)
+        public static void SeedUsers(this ModelBuilder modelBuilder)
         {
             // all passwords are Admin123!
 
@@ -78,62 +78,74 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                 UpdatedById = Guid.Parse(AdminId)
             };
 
-            //var volunteer1 = new ApplicationUser
-            //{
-            //    Id = Volunteer1Id,
-            //    ConcurrencyStamp = "434DBA35-5D04-413B-A8AF-6F61697A95F2",
-            //    SecurityStamp = "898B708C-9012-41D7-A5EB-EF0B2DF38A76",
-            //    UserName = "Volunteer1",
-            //    NormalizedUserName = "Volunteer1",
-            //    Email = "volunteer1@example.com",
-            //    EmailConfirmed = true,
-            //    FirstName = "Volunteer1",
-            //    PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
-            //    UpdatedById = Guid.Parse(AdminId)
-            //};
-            //var volunteer2 = new ApplicationUser
-            //{
-            //    Id = Volunteer2Id,
-            //    ConcurrencyStamp = "2C73315D-35F6-4F92-84AF-CCDDDA419EA7",
-            //    SecurityStamp = "ACC9E8C6-BEE1-49CC-9864-E41D6C9375A1",
-            //    UserName = "Volunteer2",
-            //    NormalizedUserName = "Volunteer2",
-            //    Email = "volunteer2@example.com",
-            //    EmailConfirmed = true,
-            //    FirstName = "Volunteer2",
-            //    PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
-            //    UpdatedById = Guid.Parse(AdminId)
-
-            //};
-            //var volunteer3 = new ApplicationUser
-            //{
-            //    Id = Volunteer3Id,
-            //    ConcurrencyStamp = "B108FCD4-3B78-4A14-BA50-51EA387C104F",
-            //    SecurityStamp = "07D9B532-D871-4288-813F-D9861F077ADB",
-            //    UserName = "Volunteer3",
-            //    NormalizedUserName = "Volunteer3",
-            //    Email = "volunteer3@example.com",
-            //    EmailConfirmed = true,
-            //    FirstName = "Volunteer3",
-            //    PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
-            //    UpdatedById = Guid.Parse(AdminId)
-            //};
-            //var volunteer4 = new ApplicationUser
-            //{
-            //    Id = Volunteer4Id,
-            //    ConcurrencyStamp = "D4EF185A-6D8C-40C3-949C-CBB178FFED34",
-            //    SecurityStamp = "D4897754-25F7-4C31-97D7-14E4A065A515",
-            //    UserName = "Volunteer4",
-            //    NormalizedUserName = "Volunteer4",
-            //    Email = "volunteer4@example.com",
-            //    EmailConfirmed = true,
-            //    FirstName = "Volunteer4",
-            //    PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
-            //    UpdatedById = Guid.Parse(AdminId)
-            //};
-            
-
             modelBuilder.Entity<ApplicationUser>().HasData(admin, organiser);
+
+            var volunteer1 = new Volunteer
+            {
+                Id = Volunteer1Id,
+                ConcurrencyStamp = "434DBA35-5D04-413B-A8AF-6F61697A95F2",
+                SecurityStamp = "898B708C-9012-41D7-A5EB-EF0B2DF38A76",
+                UserName = "Volunteer1",
+                NormalizedUserName = "Volunteer1",
+                Email = "volunteer1@example.com",
+                EmailConfirmed = true,
+                FirstName = "Volunteer1",
+                PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
+                UpdatedById = Guid.Parse(AdminId),
+                DateOfBirth = DateTime.UtcNow,
+                Height = 1,
+                Weight = 1
+            };
+            var volunteer2 = new Volunteer
+            {
+                Id = Volunteer2Id,
+                ConcurrencyStamp = "2C73315D-35F6-4F92-84AF-CCDDDA419EA7",
+                SecurityStamp = "ACC9E8C6-BEE1-49CC-9864-E41D6C9375A1",
+                UserName = "Volunteer2",
+                NormalizedUserName = "Volunteer2",
+                Email = "volunteer2@example.com",
+                EmailConfirmed = true,
+                FirstName = "Volunteer2",
+                PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
+                UpdatedById = Guid.Parse(AdminId),
+                DateOfBirth = DateTime.UtcNow,
+                Height = 1,
+                Weight = 1
+            };
+            var volunteer3 = new Volunteer
+            {
+                Id = Volunteer3Id,
+                ConcurrencyStamp = "B108FCD4-3B78-4A14-BA50-51EA387C104F",
+                SecurityStamp = "07D9B532-D871-4288-813F-D9861F077ADB",
+                UserName = "Volunteer3",
+                NormalizedUserName = "Volunteer3",
+                Email = "volunteer3@example.com",
+                EmailConfirmed = true,
+                FirstName = "Volunteer3",
+                PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
+                UpdatedById = Guid.Parse(AdminId),
+                DateOfBirth = DateTime.UtcNow,
+                Height = 1,
+                Weight = 1
+            };
+            var volunteer4 = new Volunteer
+            {
+                Id = Volunteer4Id,
+                ConcurrencyStamp = "D4EF185A-6D8C-40C3-949C-CBB178FFED34",
+                SecurityStamp = "D4897754-25F7-4C31-97D7-14E4A065A515",
+                UserName = "Volunteer4",
+                NormalizedUserName = "Volunteer4",
+                Email = "volunteer4@example.com",
+                EmailConfirmed = true,
+                FirstName = "Volunteer4",
+                PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
+                UpdatedById = Guid.Parse(AdminId),
+                DateOfBirth = DateTime.UtcNow,
+                Height = 1,
+                Weight = 1
+            };
+
+            modelBuilder.Entity<Volunteer>().HasData(volunteer1, volunteer2, volunteer3, volunteer4);
         }
 
         public static void SeedIdentityUserRoles(this ModelBuilder modelBuilder)
@@ -172,7 +184,7 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
              );
         }
 
-        public static void SeedEventsAndVolunteers(this ModelBuilder modelBuilder)
+        public static void SeedEvents(this ModelBuilder modelBuilder)
         {
             var events = new[]
             {
@@ -194,123 +206,7 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                 }
             };
 
-            //modelBuilder.Entity<Event>().HasData(events);
-            modelBuilder.SeedVolunteers(events);
-        }
-
-        public static void SeedVolunteers(this ModelBuilder modelBuilder, Event[] events)
-        {
-            //Volunteer[] volunteers = new[]
-            //{
-            //    new Volunteer
-            //    {
-            //        Id = 1,
-            //        UserId = Volunteer1Id,
-            //        Events = { events[0] },
-            //        Age = 25,
-            //        Weight = 78,
-            //        Height = 176.4
-            //    },
-            //    new Volunteer
-            //    {
-            //        Id = 2,
-            //        UserId = Volunteer2Id,
-            //        Events = { events[0] },
-            //        Age = 36,
-            //        Weight = 67.9,
-            //        Height = 162.8
-            //    },
-            //    new Volunteer
-            //    {
-            //        Id = 3,
-            //        UserId = Volunteer3Id,
-            //        Events = { events[1] },
-            //        Age = 47,
-            //        Weight = 96.5,
-            //        Height = 186.7
-
-            //    },
-            //    new Volunteer
-            //    {
-            //        Id = 4,
-            //        UserId = Volunteer4Id,
-            //        Events = { events[1] },
-            //        Age = 58,
-            //        Weight = 80.3,
-            //        Height = 181
-            //    },
-
-            //};
-
-            //modelBuilder.Entity<Volunteer>().HasData(volunteers);
-
-            var volunteer1 = new Volunteer
-            {
-                Id = Volunteer1Id,
-                ConcurrencyStamp = "434DBA35-5D04-413B-A8AF-6F61697A95F2",
-                SecurityStamp = "898B708C-9012-41D7-A5EB-EF0B2DF38A76",
-                UserName = "Volunteer1",
-                NormalizedUserName = "Volunteer1",
-                Email = "volunteer1@example.com",
-                EmailConfirmed = true,
-                FirstName = "Volunteer1",
-                PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
-                UpdatedById = Guid.Parse(AdminId),
-                DateOfBirth = DateTime.UtcNow,
-                Height = 1,
-                Weight = 1
-            };
-            var volunteer2 = new Volunteer
-            {
-                Id = Volunteer2Id,
-                ConcurrencyStamp = "2C73315D-35F6-4F92-84AF-CCDDDA419EA7",
-                SecurityStamp = "ACC9E8C6-BEE1-49CC-9864-E41D6C9375A1",
-                UserName = "Volunteer2",
-                NormalizedUserName = "Volunteer2",
-                Email = "volunteer2@example.com",
-                EmailConfirmed = true,
-                FirstName = "Volunteer2",
-                PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
-                UpdatedById = Guid.Parse(AdminId),
-                DateOfBirth = DateTime.UtcNow,
-                Height = 1,
-                Weight = 1
-
-            };
-            var volunteer3 = new Volunteer
-            {
-                Id = Volunteer3Id,
-                ConcurrencyStamp = "B108FCD4-3B78-4A14-BA50-51EA387C104F",
-                SecurityStamp = "07D9B532-D871-4288-813F-D9861F077ADB",
-                UserName = "Volunteer3",
-                NormalizedUserName = "Volunteer3",
-                Email = "volunteer3@example.com",
-                EmailConfirmed = true,
-                FirstName = "Volunteer3",
-                PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
-                UpdatedById = Guid.Parse(AdminId),
-                DateOfBirth = DateTime.UtcNow,
-                Height = 1,
-                Weight = 1
-            };
-            var volunteer4 = new Volunteer
-            {
-                Id = Volunteer4Id,
-                ConcurrencyStamp = "D4EF185A-6D8C-40C3-949C-CBB178FFED34",
-                SecurityStamp = "D4897754-25F7-4C31-97D7-14E4A065A515",
-                UserName = "Volunteer4",
-                NormalizedUserName = "Volunteer4",
-                Email = "volunteer4@example.com",
-                EmailConfirmed = true,
-                FirstName = "Volunteer4",
-                PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
-                UpdatedById = Guid.Parse(AdminId),
-                DateOfBirth = DateTime.UtcNow,
-                Height = 1,
-                Weight = 1
-            };
-
-            modelBuilder.Entity<Volunteer>().HasData(volunteer1, volunteer2, volunteer3, volunteer4);
+            modelBuilder.Entity<Event>().HasData(events);
         }
     }
 }
