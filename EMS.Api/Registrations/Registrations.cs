@@ -38,11 +38,11 @@ namespace EMS.Api.Registrations
         public static void RegisterPersistence(this ContainerBuilder builder)
         {
             // Repositories
-            //builder.RegisterAssemblyTypes(PersistenceAssembly)
-            //    .PublicOnly()
-            //    .Where(t => t.Name.EndsWith("Repository"))
-            //    .AsImplementedInterfaces()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(PersistenceAssembly)
+                .PublicOnly()
+                .Where(t => t.Name.EndsWith("Repository"))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
 
             // Units of work
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerDependency();

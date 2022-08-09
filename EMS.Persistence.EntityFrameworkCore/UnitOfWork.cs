@@ -21,9 +21,9 @@ namespace EMS.Persistence.EntityFrameworkCore
             await _context.Database.CommitTransactionAsync();
         }
 
-        public async Task SaveChangesAsync()
+        public async Task CompleteAsync()
         {
-           //await _context.Database.Sa
+            await _context.SaveChangesAsync();
         }
 
         public void Rollback() => _context.Database.RollbackTransaction();
