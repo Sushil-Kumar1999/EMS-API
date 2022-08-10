@@ -33,6 +33,7 @@ namespace EMS.Api.Registrations
 
             // Managers
             builder.RegisterType<TokenManager>().As<ITokenManager>().InstancePerLifetimeScope();
+            builder.RegisterType<SecurityManager>().As<ISecurityManager>().InstancePerLifetimeScope();
         }
 
         public static void RegisterPersistence(this ContainerBuilder builder)

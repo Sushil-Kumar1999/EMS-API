@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -36,6 +36,10 @@
     <ProjectReference Include="..\EMS.Core.Application\EMS.Core.Application.csproj" />
     <ProjectReference Include="..\EMS.Core.DataTransfer\EMS.Core.DataTransfer.csproj" />
     <ProjectReference Include="..\EMS.Persistence.EntityFrameworkCore\EMS.Persistence.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\EMS.Api\EmailTemplates\welcome-email-template.html" />
   </ItemGroup>
 
 </Project>

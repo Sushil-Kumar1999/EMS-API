@@ -34,7 +34,7 @@ namespace EMS.Api.Controllers.Users
                 return BadRequest("Invalid payload");
             }
 
-            var command = new RegisterUserCommand(request.FirstName, request.LastName, request.Email, request.Password, request.Role);
+            var command = new RegisterUserCommand(request.FirstName, request.LastName, request.Email, request.Role);
             UserRegistrationResponseDto response = await _mediator.Send(command);
 
             return Ok(response);
