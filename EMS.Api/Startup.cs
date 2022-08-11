@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using EMS.Api.Infrastructure;
 using EMS.Api.Registrations;
 using EMS.Core.Application.Domain.Users;
 using EMS.Core.Application.Infrastructure.Security;
@@ -48,6 +49,14 @@ namespace EMS.Api
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services
+               .AddMvc(option =>
+               {
+                   option.Filters.Add<ApiExceptionFilter>();
+               })
+               .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+               .AddNewtonsoftJson();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
