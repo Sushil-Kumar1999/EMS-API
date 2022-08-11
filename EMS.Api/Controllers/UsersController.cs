@@ -25,7 +25,7 @@ namespace EMS.Api.Controllers
         }
 
         [HttpPost("register")]
-        //[Authorize(Roles = nameof(UserRoles.Admin))]
+        [Authorize(Roles = nameof(UserRoles.Admin))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         //[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationErrorsResponse))]
         public async Task<IActionResult> RegisterAsync([FromBody] UserRegistrationRequestDataContract request)
