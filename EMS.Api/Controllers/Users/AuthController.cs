@@ -5,9 +5,6 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using EMS.Core.Application.Domain.Enums;
-using Microsoft.AspNetCore.Authorization;
 
 namespace EMS.Api.Controllers.Users
 {
@@ -21,23 +18,6 @@ namespace EMS.Api.Controllers.Users
         public AuthController(IMediator mediator)
         {
             _mediator = mediator;
-        }
-
-        [HttpPost("register")]
-        //[Authorize(Roles = nameof(UserRoles.Admin))]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationErrorsResponse))]
-        public async Task<IActionResult> RegisterAsync([FromBody] UserRegistrationRequestDataContract request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Invalid payload");
-            }
-
-            var command = new RegisterUserCommand(request.FirstName, request.LastName, request.Email, request.Role);
-            UserRegistrationResponseDto response = await _mediator.Send(command);
-
-            return Ok(response);
         }
 
         [HttpPost("login")]
