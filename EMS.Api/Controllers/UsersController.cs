@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace EMS.Api.Controllers.Users
+namespace EMS.Api.Controllers
 {
     [Route("users")]
     [ApiController]
