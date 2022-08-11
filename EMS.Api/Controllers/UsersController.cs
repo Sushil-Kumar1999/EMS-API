@@ -1,4 +1,5 @@
-﻿using EMS.Core.Application.Domain.Enums;
+﻿using EMS.Api.Infrastructure;
+using EMS.Core.Application.Domain.Enums;
 using EMS.Core.Application.Domain.Users.Commands;
 using EMS.Core.Application.Domain.Users.Queries;
 using EMS.Core.DataTransfer.Users.DataContracts;
@@ -27,7 +28,7 @@ namespace EMS.Api.Controllers
         [HttpPost("register")]
         [Authorize(Roles = nameof(UserRoles.Admin))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationErrorsResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationErrorsResponse))]
         public async Task<IActionResult> RegisterAsync([FromBody] UserRegistrationRequestDataContract request)
         {
             if (!ModelState.IsValid)
