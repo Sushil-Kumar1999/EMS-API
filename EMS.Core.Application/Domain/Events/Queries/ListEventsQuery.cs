@@ -1,4 +1,4 @@
-﻿using EMS.Core.DataTransfer.Users.DTOs;
+﻿using EMS.Core.DataTransfer.Events.DTOs;
 using MediatR;
 using System.Collections.Generic;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EMS.Core.DataTransfer.Users.DTOs
+namespace EMS.Core.DataTransfer.Events.DTOs
 {
     public class EventDto
     {

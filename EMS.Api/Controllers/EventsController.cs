@@ -1,6 +1,8 @@
 ﻿using EMS.Core.Application.Domain.Enums;
+using EMS.Core.Application.Domain.Events.Commands;
 using EMS.Core.Application.Domain.Events.Queries;
-using EMS.Core.DataTransfer.Users.DTOs;
+using EMS.Core.DataTransfer.Events.DataContracts;
+using EMS.Core.DataTransfer.Events.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -35,5 +37,16 @@ namespace EMS.Api.Controllers
 
             return Ok(events);
         }
+
+        //[HttpPost]
+        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        //[Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
+        //public async Task<IActionResult> CreateAsync([FromBody] CreateEventRequestDataContract request)
+        //{
+        //    CreateEventCommand command = new CreateEventCommand();
+        //    long eventId = await _mediator.Send(command);
+
+        //    return Ok(eventId);
+        //}
     }
 }
