@@ -1,12 +1,13 @@
 ﻿using EMS.Core.Application.Domain.Enums;
+using EMS.Core.Application.Exceptions;
 using EMS.Core.Application.Infrastructure.Persistence;
-using EMS.Core.Application.Infrastructure.Persistence.Repositories;
 using EMS.Core.Application.Infrastructure.Security;
 using EMS.Core.Application.Utils;
 using EMS.Core.DataTransfer.Users.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
 
             if (user != null)
             {
-                throw new Exception("Email already in use");
+                throw new ValidationException(new[] { "This email address is already in use" });
             }
 
             (IdentityResult result, ApplicationUser newUser) = request.Role == nameof(UserRoles.Volunteer)
@@ -47,7 +48,7 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
 
             if (!result.Succeeded)
             {
-                throw new Exception("Creation of user failed");
+                throw new Exception(result.Errors.Select(e => e.Description).ToString());
             }
 
             await _userManager.AddToRoleAsync(newUser, request.Role);

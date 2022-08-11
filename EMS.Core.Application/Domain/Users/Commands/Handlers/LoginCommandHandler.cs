@@ -1,4 +1,5 @@
-﻿using EMS.Core.Application.Infrastructure.Security;
+﻿using EMS.Core.Application.Exceptions;
+using EMS.Core.Application.Infrastructure.Security;
 using EMS.Core.DataTransfer.Users.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -25,14 +26,14 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
 
             if (user == null)
             {
-                throw new Exception("Invalid credentials");
+                throw new InvalidLoginAttemptException("Email or password is incorrect");
             }
 
             bool isPasswordCorrect = await _userManager.CheckPasswordAsync(user, request.Password);
 
             if (!isPasswordCorrect)
             {
-                throw new Exception("Invalid credentials");
+                throw new InvalidLoginAttemptException("Email or password is incorrect");
             }
 
             string jwtToken = await _tokenManager.GenerateTokenAsync(user);
