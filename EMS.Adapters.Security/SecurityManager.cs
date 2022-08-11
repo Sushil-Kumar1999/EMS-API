@@ -1,6 +1,7 @@
 ﻿using EMS.Core.Application.Domain.Users;
 using EMS.Core.Application.Domain.Users.Services;
 using EMS.Core.Application.Infrastructure.Security;
+using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -11,10 +12,12 @@ namespace EMS.Security.Jwt
     public class SecurityManager : ISecurityManager
     {
         private readonly IMailService _mailService;
+        private readonly IConfiguration Configuration;
 
-        public SecurityManager(IMailService mailService)
+        public SecurityManager(IMailService mailService, IConfiguration configuration)
         {
             _mailService = mailService;
+            Configuration = configuration;
         }
 
         public async Task SendConfirmationEmailAsync(ApplicationUser applicationUser, string tempPassword)
@@ -29,7 +32,8 @@ namespace EMS.Security.Jwt
                     .Replace("{{FirstName}}", applicationUser.FirstName)
                     .Replace("{{LastName}}", applicationUser.LastName)
                     .Replace("{{Email}}", applicationUser.Email)
-                    .Replace("{{Password}}", tempPassword);
+                    .Replace("{{Password}}", tempPassword)
+                    .Replace("{{LoginUrl}}", $"{Configuration["WebAppUrl"]}/login");
 
                 await _mailService.SendEmailAsync(applicationUser.Email, "Welcome to EMS", content);
             }
