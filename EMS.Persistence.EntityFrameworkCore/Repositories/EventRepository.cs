@@ -1,4 +1,4 @@
-﻿using EMS.Core.Application.Domain;
+﻿using EMS.Core.Application.Domain.Events;
 using EMS.Core.Application.Infrastructure.Persistence.Repositories;
 using EMS.Persistence.EntityFrameworkCore.DataAccess;
 using Microsoft.EntityFrameworkCore;

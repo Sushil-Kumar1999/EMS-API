@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace EMS.Core.Application.Domain.Users.Queries.Handlers
+namespace EMS.Core.Application.Domain.Events.Queries.Handlers
 {
     public class ListEventsQueryHandler : IRequestHandler<ListEventsQuery, IEnumerable<EventDto>>
     {

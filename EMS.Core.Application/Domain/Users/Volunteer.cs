@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EMS.Core.Application.Domain.Events;
+using System;
 using System.Collections.Generic;
 
 namespace EMS.Core.Application.Domain.Users

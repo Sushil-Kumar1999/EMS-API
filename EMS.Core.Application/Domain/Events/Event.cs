@@ -3,7 +3,7 @@ using EMS.Core.Application.Domain.Users;
 using System;
 using System.Collections.Generic;
 
-namespace EMS.Core.Application.Domain
+namespace EMS.Core.Application.Domain.Events
 {
     public class Event : BaseEntity
     {

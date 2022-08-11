@@ -1,5 +1,5 @@
 ﻿using EMS.Core.Application.Domain.Enums;
-using EMS.Core.Application.Domain.Users.Queries;
+using EMS.Core.Application.Domain.Events.Queries;
 using EMS.Core.DataTransfer.Users.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,6 +34,6 @@ namespace EMS.Api.Controllers
             IEnumerable<EventDto> events = await _mediator.Send(query);
 
             return Ok(events);
-       }
+        }
     }
 }

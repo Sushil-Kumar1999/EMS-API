@@ -1,4 +1,4 @@
-﻿using EMS.Core.Application.Domain;
+﻿using EMS.Core.Application.Domain.Events;
 using EMS.Core.Application.Domain.Enums;
 using EMS.Core.Application.Domain.Users;
 using Microsoft.AspNetCore.Identity;
