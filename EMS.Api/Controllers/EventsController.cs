@@ -38,15 +38,15 @@ namespace EMS.Api.Controllers
             return Ok(events);
         }
 
-        //[HttpPost]
-        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-        //[Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
-        //public async Task<IActionResult> CreateAsync([FromBody] CreateEventRequestDataContract request)
-        //{
-        //    CreateEventCommand command = new CreateEventCommand();
-        //    long eventId = await _mediator.Send(command);
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
+        public async Task<IActionResult> CreateAsync([FromBody] CreateEventRequestDataContract request)
+        {
+            CreateEventCommand command = new CreateEventCommand(request.Name, request.StartDate, request.EndDate);
+            long eventId = await _mediator.Send(command);
 
-        //    return Ok(eventId);
-        //}
+            return Ok(eventId);
+        }
     }
 }
