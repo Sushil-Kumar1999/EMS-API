@@ -21,7 +21,8 @@ namespace EMS.Core.Application.Domain.Events.Queries.Handlers
         {
             IEnumerable<Event> events = await _eventRepository.ListAsync();
 
-            IEnumerable<EventDto> eventDtos = events.Select(e => new EventDto(e.Name, e.StartDate, e.EndDate));
+            IEnumerable<EventDto> eventDtos = events.Select(e => new EventDto(e.Id, e.Title, e.Description,
+                                                        e.Location, e.StartDate, e.EndDate));
 
             return eventDtos;
         }

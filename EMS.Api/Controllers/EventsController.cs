@@ -43,7 +43,9 @@ namespace EMS.Api.Controllers
         [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> CreateAsync([FromBody] CreateEventRequestDataContract request)
         {
-            CreateEventCommand command = new CreateEventCommand(request.Name, request.StartDate, request.EndDate);
+            CreateEventCommand command = new CreateEventCommand(request.Title, request.Description, 
+                                                                request.Location, request.StartDate,
+                                                                request.EndDate);
             long eventId = await _mediator.Send(command);
 
             return Ok(eventId);

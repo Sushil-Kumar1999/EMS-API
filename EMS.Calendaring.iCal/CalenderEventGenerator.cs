@@ -17,7 +17,7 @@ namespace EMS.Calendaring.iCal
 
             var icalEvent = new CalendarEvent
             {
-                Summary = @event.Name,
+                Summary = @event.Title,
                 Description = "Description for event",
                 DtStart = new CalDateTime(@event.StartDate),
                 DtEnd = new CalDateTime(@event.EndDate)

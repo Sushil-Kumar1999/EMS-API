@@ -7,11 +7,13 @@ namespace EMS.Core.Application.Domain.Events
 {
     public class Event : BaseEntity
     {
-        public string Name { get; set; }
-        public Guid CreatedById { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         // volunteers selected for event
+        public Guid CreatedById { get; set; }
         public virtual ICollection<Volunteer> Volunteers { get; set; }
     }
 }

@@ -191,7 +191,9 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                 new Event
                 {
                     Id = 1,
-                    Name = "New Miracle Experiment",
+                    Title = "New Miracle Experiment",
+                    Description = "Hello world",
+                    Location = "Barbados",
                     CreatedById = Guid.Parse(OrganiserId),
                     StartDate = new DateTime(2022, 6, 8, 9, 0, 0),
                     EndDate = new DateTime(2022, 6, 8, 17, 0, 0)
@@ -199,7 +201,9 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                 new Event
                 {
                     Id = 2,
-                    Name = "Revolutionary study",
+                    Title = "Revolutionary study",
+                    Description = "lorum epsum",
+                    Location = "Antigua",
                     CreatedById = Guid.Parse(OrganiserId),
                     StartDate = new DateTime(2022, 6, 10, 9, 0, 0),
                     EndDate = new DateTime(2022, 8, 10, 17, 0, 0)

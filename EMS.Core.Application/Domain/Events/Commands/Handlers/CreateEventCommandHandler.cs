@@ -25,7 +25,9 @@ namespace EMS.Core.Application.Domain.Events.Commands.Handlers
         {
             Event newEvent = new Event
             {
-                Name = command.Name,
+                Title = command.Title,
+                Description = command.Description,
+                Location = command.Location,
                 StartDate = command.StartDate,
                 EndDate = command.EndDate,
             };
