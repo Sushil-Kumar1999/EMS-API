@@ -17,17 +17,17 @@ namespace EMS.Calendaring.iCal
 
             var icalEvent = new CalendarEvent
             {
-                Summary = "Title of event",
+                Summary = @event.Name,
                 Description = "Description for event",
-                Start = new CalDateTime(@event.StartDate),
-                End = new CalDateTime(@event.EndDate)
+                DtStart = new CalDateTime(@event.StartDate),
+                DtEnd = new CalDateTime(@event.EndDate)
             };
 
             calendar.Events.Add(icalEvent);
 
             var iCalSerializer = new CalendarSerializer();
             string result = iCalSerializer.SerializeToString(calendar);
-
+            //    return File(Encoding.ASCII.GetBytes(result), "text/calendar", "calendar.ics");
             return Encoding.ASCII.GetBytes(result);
         }
     }
