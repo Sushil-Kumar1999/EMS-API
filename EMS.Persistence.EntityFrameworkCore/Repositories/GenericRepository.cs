@@ -29,7 +29,7 @@ namespace EMS.Persistence.EntityFrameworkCore.Repositories
             return true;
         }
 
-        public virtual async Task<T> GetByIdAsync(Guid Id)
+        public virtual async Task<T> GetByIdAsync(long Id)
         {
             return await _dbSet.FindAsync(Id);
         }

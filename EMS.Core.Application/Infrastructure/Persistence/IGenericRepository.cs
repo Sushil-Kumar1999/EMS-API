@@ -10,7 +10,7 @@ namespace EMS.Core.Application.Infrastructure.Persistence
     {
         Task<IEnumerable<T>> ListAsync();
 
-        Task<T> GetByIdAsync(Guid Id);
+        Task<T> GetByIdAsync(long Id);
 
         Task<bool> AddAsync(T entity);
 

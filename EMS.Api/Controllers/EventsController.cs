@@ -1,6 +1,7 @@
 ﻿using EMS.Core.Application.Domain.Enums;
 using EMS.Core.Application.Domain.Events.Commands;
 using EMS.Core.Application.Domain.Events.Queries;
+using EMS.Core.Application.Domain.Users.Commands;
 using EMS.Core.DataTransfer.Events.DataContracts;
 using EMS.Core.DataTransfer.Events.DTOs;
 using MediatR;
@@ -50,5 +51,18 @@ namespace EMS.Api.Controllers
 
             return Ok(eventId);
         }
+
+        [HttpPost("{eventId}/inviteVolunteers")]
+        [Produces("application/json")]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
+        public async Task<IActionResult> SendInvitationsAsync([FromRoute] long eventId,  [FromBody] IEnumerable<string> emails)
+        {
+            var command = new SendInvitationsCommand(eventId, emails);
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+
+        //public async Task<IActionResult>
     }
 }

@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="..\EMS.Api\EmailTemplates\welcome-email-template.html" />
+    <EmbeddedResource Include="..\EMS.Api\EmailTemplates\invitation-to-event.html" />
   </ItemGroup>
 
 </Project>
