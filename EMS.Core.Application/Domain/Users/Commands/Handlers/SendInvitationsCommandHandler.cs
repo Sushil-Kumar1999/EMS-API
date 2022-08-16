@@ -38,10 +38,20 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
                     .Replace("{{StartDate}}", @event.StartDate.ToString("dddd dd MMMM yyyy hh:mm tt"))
                     .Replace("{{EndDate}}", @event.EndDate.ToString("dddd dd MMMM yyyy hh:mm tt"));
 
-                await _mailService.SendEmailAsync(request.EmailAddresses, "Invitation to event", content);
+                string baseUrl = $"https://localhost:5001/events/{request.EventId}/invitation";
+
+                foreach (string recipientEmail in request.EmailAddresses)
+                {
+                    string yesURL = baseUrl + $"?volunteerEmail={recipientEmail}&response=true";
+                    string noUrl = baseUrl + $"?volunteerEmail={recipientEmail}&response=false";
+
+                    string htmlContent = content.Replace("{{YesURL}}", yesURL).Replace("{{NoURL}}", noUrl);
+
+                    await _mailService.SendEmailAsync(recipientEmail, "Invitation to event", htmlContent);
+                }
             }
 
-            return 1;
+            return 0;
         }
     }
 }
