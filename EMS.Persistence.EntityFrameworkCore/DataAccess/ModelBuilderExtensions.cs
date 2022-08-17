@@ -92,7 +92,7 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                 FirstName = "Volunteer1",
                 PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
                 UpdatedById = Guid.Parse(AdminId),
-                DateOfBirth = DateTime.UtcNow,
+                DateOfBirth = new DateTime(2000, 8, 15, 15, 37, 17),
                 Height = 1,
                 Weight = 1
             };
@@ -108,7 +108,7 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                 FirstName = "Volunteer2",
                 PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
                 UpdatedById = Guid.Parse(AdminId),
-                DateOfBirth = DateTime.UtcNow,
+                DateOfBirth = new DateTime(1973, 8, 15),
                 Height = 1,
                 Weight = 1
             };
@@ -124,7 +124,7 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                 FirstName = "Volunteer3",
                 PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
                 UpdatedById = Guid.Parse(AdminId),
-                DateOfBirth = DateTime.UtcNow,
+                DateOfBirth = new DateTime(198, 6, 19),
                 Height = 1,
                 Weight = 1
             };
@@ -140,7 +140,7 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
                 FirstName = "Volunteer4",
                 PasswordHash = "AQAAAAEAACcQAAAAELvNvu45ryG3Vyo/TYNAbPWDcm6C8lS/FAGigtMGlnhpPQzlOc9FI5AgmO6AQhx7Rw==", // Admin123!
                 UpdatedById = Guid.Parse(AdminId),
-                DateOfBirth = DateTime.UtcNow,
+                DateOfBirth = new DateTime(1992, 1, 1),
                 Height = 1,
                 Weight = 1
             };

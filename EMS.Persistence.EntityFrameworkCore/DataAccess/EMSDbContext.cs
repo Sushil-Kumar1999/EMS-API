@@ -1,4 +1,5 @@
 ﻿using EMS.Core.Application.Domain.Events;
+using EMS.Core.Application.Domain.Invitations;
 using EMS.Core.Application.Domain.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace EMS.Persistence.EntityFrameworkCore.DataAccess
 
         public DbSet<Event> Events { get; set; }
         public DbSet<Volunteer> Volunteers { get; set; }
+        public DbSet<Invitation> Invitations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
