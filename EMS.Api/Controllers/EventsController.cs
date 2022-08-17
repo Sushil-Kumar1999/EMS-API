@@ -4,6 +4,7 @@ using EMS.Core.Application.Domain.Events.Queries;
 using EMS.Core.Application.Domain.Users.Commands;
 using EMS.Core.DataTransfer.Events.DataContracts;
 using EMS.Core.DataTransfer.Events.DTOs;
+using EMS.Core.DataTransfer.Invitations.DataContracts;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -50,24 +51,6 @@ namespace EMS.Api.Controllers
             long eventId = await _mediator.Send(command);
 
             return Ok(eventId);
-        }
-
-        [HttpPost("{eventId}/inviteVolunteers")]
-        [Produces("application/json")]
-        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
-        public async Task<IActionResult> SendInvitationsAsync([FromRoute] long eventId,  [FromBody] IEnumerable<string> emails)
-        {
-            var command = new SendInvitationsCommand(eventId, emails);
-            await _mediator.Send(command);
-
-            return NoContent();
-        }
-
-        [HttpGet("{eventId}/invitation")]
-        [AllowAnonymous]
-        public async Task RespondToInvitationAsync([FromRoute] long eventId, [FromQuery] string volunteerEmail, [FromQuery] bool response)
-        {
-            Console.WriteLine($"{eventId} {response} {volunteerEmail}");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using EMS.Core.DataTransfer.Invitations.DataContracts;
+using MediatR;
 using System.Collections.Generic;
 
 namespace EMS.Core.Application.Domain.Users.Commands
@@ -6,12 +7,12 @@ namespace EMS.Core.Application.Domain.Users.Commands
     public class SendInvitationsCommand : IRequest<int>
     {
         public long EventId { get; }
-        public IEnumerable<string> EmailAddresses { get; }
+        public IEnumerable<VolunteerDetailsDataContract> VolunteerDetails { get; set; }
 
-        public SendInvitationsCommand(long eventId, IEnumerable<string> emailAddresses)
+        public SendInvitationsCommand(long eventId, IEnumerable<VolunteerDetailsDataContract> volunteerDetails)
         {
             EventId = eventId;
-            EmailAddresses = emailAddresses;
+            VolunteerDetails = volunteerDetails;
         }
     }
 }

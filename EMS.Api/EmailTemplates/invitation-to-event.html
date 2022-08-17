@@ -398,10 +398,9 @@
 
 <script>
     function sendResponse(url) {
-        alert("Your response has been recorded. Please wait for confirmation email.");
-
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", url, true);
         xhttp.send();
+        alert("Your response has been recorded. Please wait for confirmation email.");
     }
 </script>
