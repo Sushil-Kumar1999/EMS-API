@@ -1,11 +1,11 @@
 ﻿using EMS.Core.Application.Domain.Enums;
+using EMS.Core.Application.Domain.Invitations.Commands;
 using EMS.Core.Application.Domain.Users.Commands;
 using EMS.Core.DataTransfer.Invitations.DataContracts;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace EMS.Api.Controllers
@@ -37,8 +37,8 @@ namespace EMS.Api.Controllers
         [Consumes("application/x-www-form-urlencoded")]
         public async Task<IActionResult> RespondToInvitationAsync([FromForm] RespondToInvitationDataContract dc)
         {
-            Console.WriteLine($"EventID : {dc.EventId}\nVolunteerID: {dc.VolunteerId}\nVolunteerEmail: {dc.VolunteerEmail}\nResponse: {dc.Response}");
-            await Task.CompletedTask;
+            var command = new UpdateInvitationCommand(dc.EventId, dc.VolunteerId, dc.VolunteerEmail, dc.Response);
+            await _mediator.Send(command);
 
             return NoContent() ;
         }

@@ -9,5 +9,6 @@ namespace EMS.Core.Application.Infrastructure.Persistence.Repositories
     {
         Task<IEnumerable<Invitation>> FindByEventIdAsync(long eventId, InvitationStatus status = 0);
         Task<IEnumerable<Invitation>> FindByVolunteerIdAsync(string volunteerId, InvitationStatus status = 0);
+        Task<Invitation> GetByVolunteerIdAndEventIdAsync(string volunteerId, long eventId);
     }
 }

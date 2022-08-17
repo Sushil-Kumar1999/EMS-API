@@ -29,5 +29,10 @@ namespace EMS.Persistence.EntityFrameworkCore.Repositories
                                .Where(inv => inv.InvitationStatus == status && status != 0)
                                .ToListAsync();
         }
+
+        public async Task<Invitation> GetByVolunteerIdAndEventIdAsync(string volunteerId, long eventId)
+        {
+            return await _dbSet.SingleAsync(x => x.VolunteerId == volunteerId && x.EventId == eventId);
+        }
     }
 }
