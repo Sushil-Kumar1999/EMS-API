@@ -65,7 +65,7 @@ namespace EMS.Api.Controllers
 
         [HttpGet("{eventId}/invitation")]
         [AllowAnonymous]
-        public void Confirm([FromRoute] long eventId, [FromQuery] string volunteerEmail, [FromQuery] bool response)
+        public async Task RespondToInvitationAsync([FromRoute] long eventId, [FromQuery] string volunteerEmail, [FromQuery] bool response)
         {
             Console.WriteLine($"{eventId} {response} {volunteerEmail}");
         }
