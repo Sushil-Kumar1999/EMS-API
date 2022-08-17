@@ -38,23 +38,20 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
             using (var reader = new StreamReader(resourceStream, Encoding.UTF8))
             {
                 string emailTemplate = await reader.ReadToEndAsync();
+                string baseUrl = $"{_configuration["LocalUrl"]}/invitations/respond";
                 string content = emailTemplate
                     .Replace("{{Title}}", @event.Title)
                     .Replace("{{Location}}", @event.Location)
                     .Replace("{{Description}}", @event.Description)
                     .Replace("{{StartDate}}", @event.StartDate.ToString("dddd dd MMMM yyyy hh:mm tt"))
-                    .Replace("{{EndDate}}", @event.EndDate.ToString("dddd dd MMMM yyyy hh:mm tt"));
-
-                
-                string baseUrl = $"{_configuration["LocalUrl"]}/invitations/respond?eventId={request.EventId}";
+                    .Replace("{{EndDate}}", @event.EndDate.ToString("dddd dd MMMM yyyy hh:mm tt"))
+                    .Replace("{{EventId}}", request.EventId.ToString())
+                    .Replace("{{BaseUrl}}", baseUrl);
 
                 foreach (VolunteerDetailsDataContract detail in request.VolunteerDetails)
                 {
-                    string yesURL = baseUrl + $"&volunteerId={detail.VolunteerId}&volunteerEmail={detail.VolunteerEmail}&response=true";
-                    string noUrl = baseUrl + $"&volunteerId={detail.VolunteerId}&volunteerEmail={detail.VolunteerEmail}&response=false";
-
-                    string htmlContent = content.Replace("{{YesURL}}", yesURL).Replace("{{NoURL}}", noUrl);
-
+                    string htmlContent = content.Replace("{{VolunteerId}}", detail.VolunteerId)
+                                                .Replace("{{VolunteerEmail}}", detail.VolunteerEmail);
                     await _mailService.SendEmailAsync(detail.VolunteerEmail, "Invitation to event", htmlContent);
                 }
             }

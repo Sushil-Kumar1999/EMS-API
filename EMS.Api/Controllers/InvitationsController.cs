@@ -32,17 +32,15 @@ namespace EMS.Api.Controllers
             return NoContent();
         }
 
-        [HttpGet("respond")]
+        [HttpPost("respond")]
         [AllowAnonymous]
-        public async Task RespondToInvitationAsync([FromQuery] long eventId,
-                                                   [FromQuery] string volunteerId,
-                                                   [FromQuery] string volunteerEmail,
-                                                   [FromQuery] bool response)
+        [Consumes("application/x-www-form-urlencoded")]
+        public async Task<IActionResult> RespondToInvitationAsync([FromForm] RespondToInvitationDataContract dc)
         {
-            Console.WriteLine(@$"EventID : {eventId}
-                                Response: {response}
-                                VolunteerID: {volunteerId}
-                                VolunteerEmail: {volunteerEmail}");
+            Console.WriteLine($"EventID : {dc.EventId}\nVolunteerID: {dc.VolunteerId}\nVolunteerEmail: {dc.VolunteerEmail}\nResponse: {dc.Response}");
+            await Task.CompletedTask;
+
+            return NoContent() ;
         }
     }
 }
