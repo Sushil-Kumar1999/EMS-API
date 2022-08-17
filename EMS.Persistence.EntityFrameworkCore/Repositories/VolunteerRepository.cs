@@ -17,6 +17,13 @@ namespace EMS.Persistence.EntityFrameworkCore.Repositories
 
         }
 
+        public async Task<IEnumerable<Volunteer>> GetAllByIds(IEnumerable<string> volunteerIds)
+        {
+            return  await _dbSet.Where(x => volunteerIds.Contains(x.Id))
+                                .AsNoTracking()
+                                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Volunteer>> FindAsync(FilterVolunteersQueryObject query)
         {
             IEnumerable<Volunteer> results =  await _dbSet

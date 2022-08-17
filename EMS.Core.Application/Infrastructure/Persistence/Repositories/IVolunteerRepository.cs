@@ -8,5 +8,6 @@ namespace EMS.Core.Application.Infrastructure.Persistence.Repositories
     public interface IVolunteerRepository : IGenericRepository<Volunteer>
     {
         Task<IEnumerable<Volunteer>> FindAsync(FilterVolunteersQueryObject query);
+        Task<IEnumerable<Volunteer>> GetAllByIds(IEnumerable<string> volunteerIds);
     }
 }

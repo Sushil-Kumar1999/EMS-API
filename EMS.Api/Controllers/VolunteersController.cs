@@ -1,5 +1,6 @@
 ﻿using EMS.Core.Application.Domain.Enums;
 using EMS.Core.Application.Domain.Users.Commands;
+using EMS.Core.Application.Domain.Users.Queries;
 using EMS.Core.DataTransfer.Users.DataContracts;
 using EMS.Core.DataTransfer.Users.DTOs;
 using MediatR;
@@ -30,6 +31,51 @@ namespace EMS.Api.Controllers
         {
             var query = new FindVolunteersCommand(request.MinAge, request.MaxAge, request.MinHeight,
                                                 request.MaxHeight, request.MinWeight, request.MaxWeight);
+            IEnumerable<UserDto> volunteers = await _mediator.Send(query);
+
+            return Ok(volunteers);
+        }
+
+        [HttpGet("event/{eventId}/invited")]
+        public async Task<IActionResult> FindInvitedVolunteersAsync([FromRoute] long eventId)
+        {
+            var query = new FindVolunteersInInvitationQuery(eventId, InvitationStatus.Invited) ;
+            IEnumerable<UserDto> volunteers = await _mediator.Send(query);
+
+            return Ok(volunteers);
+        }
+
+        [HttpGet("event/{eventId}/accepted")]
+        public async Task<IActionResult> FindAcceptedVolunteersAsync([FromRoute] long eventId)
+        {
+            var query = new FindVolunteersInInvitationQuery(eventId, InvitationStatus.Accepted);
+            IEnumerable<UserDto> volunteers = await _mediator.Send(query);
+
+            return Ok(volunteers);
+        }
+
+        [HttpGet("event/{eventId}/declined")]
+        public async Task<IActionResult> FindDeclinedVolunteersAsync([FromRoute] long eventId)
+        {
+            var query = new FindVolunteersInInvitationQuery(eventId, InvitationStatus.Declined);
+            IEnumerable<UserDto> volunteers = await _mediator.Send(query);
+
+            return Ok(volunteers);
+        }
+
+        [HttpGet("event/{eventId}/confirmed")]
+        public async Task<IActionResult> FindConfirmedVolunteersAsync([FromRoute] long eventId)
+        {
+            var query = new FindVolunteersInInvitationQuery(eventId, InvitationStatus.Confirmed);
+            IEnumerable<UserDto> volunteers = await _mediator.Send(query);
+
+            return Ok(volunteers);
+        }
+
+        [HttpGet("event/{eventId}/rejected")]
+        public async Task<IActionResult> FindRejectedVolunteersAsync([FromRoute] long eventId)
+        {
+            var query = new FindVolunteersInInvitationQuery(eventId, InvitationStatus.Rejected);
             IEnumerable<UserDto> volunteers = await _mediator.Send(query);
 
             return Ok(volunteers);
