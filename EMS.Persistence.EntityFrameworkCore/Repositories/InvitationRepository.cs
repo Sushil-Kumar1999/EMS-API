@@ -19,14 +19,14 @@ namespace EMS.Persistence.EntityFrameworkCore.Repositories
         public async Task<IEnumerable<Invitation>> FindByEventIdAsync(long eventId, InvitationStatus status = 0)
         {
             return await _dbSet.Where(inv => inv.EventId == eventId)
-                               .Where(inv => inv.InvitationStatus == status && status != 0)
+                               .Where(inv => inv.InvitationStatus == status || status == 0)
                                .ToListAsync();
         }
 
         public async Task<IEnumerable<Invitation>> FindByVolunteerIdAsync(string volunteerId, InvitationStatus status = 0)
         {
             return await _dbSet.Where(inv => inv.VolunteerId == volunteerId)
-                               .Where(inv => inv.InvitationStatus == status && status != 0)
+                               .Where(inv => inv.InvitationStatus == status || status == 0)
                                .ToListAsync();
         }
 

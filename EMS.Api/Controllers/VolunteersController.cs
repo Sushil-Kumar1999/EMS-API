@@ -36,6 +36,15 @@ namespace EMS.Api.Controllers
             return Ok(volunteers);
         }
 
+        [HttpGet("event/{eventId}/invited")]
+        public async Task<IActionResult> FindInvitedVolunteersAsync([FromRoute] long eventId)
+        {
+            var query = new FindVolunteersInInvitationQuery(eventId, 0);
+            IEnumerable<UserDto> volunteers = await _mediator.Send(query);
+
+            return Ok(volunteers);
+        }
+
         [HttpGet("event/{eventId}/unresponded")]
         public async Task<IActionResult> FindUnrespondedVolunteersAsync([FromRoute] long eventId)
         {
