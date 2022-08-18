@@ -74,7 +74,7 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
             {
                 EventId = eventId,
                 VolunteerId = volunteerId,
-                InvitationStatus = Enums.InvitationStatus.Invited,
+                InvitationStatus = Enums.InvitationStatus.Unresponded,
                 Status = 1
             };
 
