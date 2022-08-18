@@ -29,6 +29,8 @@ namespace EMS.Core.Application.Domain.Invitations.Commands.Handlers
             
             await _uow.CommitAsync();
 
+            // TODO: if invitation status is confirmed or rejected send emails to affected volunteers
+
             return 0;
         }
     }

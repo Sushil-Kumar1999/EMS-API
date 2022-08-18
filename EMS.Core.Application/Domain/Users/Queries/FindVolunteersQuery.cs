@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EMS.Core.Application.Domain.Users.Commands
+namespace EMS.Core.Application.Domain.Users.Queries
 {
-    public class FindVolunteersCommand : IRequest<IEnumerable<UserDto>>
+    public class FindVolunteersQuery : IRequest<IEnumerable<UserDto>>
     {
         public double MinAge { get; set; }
         public double MaxAge { get; set; }
@@ -20,7 +20,7 @@ namespace EMS.Core.Application.Domain.Users.Commands
 
         public double MaxWeight { get; set; }
 
-        public FindVolunteersCommand(double minAge, double maxAge, double minHeight,
+        public FindVolunteersQuery(double minAge, double maxAge, double minHeight,
                                        double maxHeight, double minWeight, double maxWeight)
         {
             MinAge = minAge;

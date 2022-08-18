@@ -9,18 +9,18 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace EMS.Core.Application.Domain.Users.Commands.Handlers
+namespace EMS.Core.Application.Domain.Users.Queries.Handlers
 {
-    public class FindVolunteersCommandHandler : IRequestHandler<FindVolunteersCommand, IEnumerable<UserDto>>
+    public class FindVolunteersQueryHandler : IRequestHandler<FindVolunteersQuery, IEnumerable<UserDto>>
     {
         private readonly IVolunteerRepository _volunteerRepository;
 
-        public FindVolunteersCommandHandler(IVolunteerRepository volunteerRepository)
+        public FindVolunteersQueryHandler(IVolunteerRepository volunteerRepository)
         {
             _volunteerRepository = volunteerRepository;
         }
 
-        public async Task<IEnumerable<UserDto>> Handle(FindVolunteersCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<UserDto>> Handle(FindVolunteersQuery request, CancellationToken cancellationToken)
         {
             var query = new FilterVolunteersQueryObject(request.MinAge, request.MaxAge, request.MinHeight,
                                                         request.MaxHeight, request.MinWeight, request.MaxHeight);
