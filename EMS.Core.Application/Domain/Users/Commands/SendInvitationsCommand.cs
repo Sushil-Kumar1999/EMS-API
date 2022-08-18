@@ -1,4 +1,5 @@
 ﻿using EMS.Core.DataTransfer.Invitations.DataContracts;
+using EMS.Core.DataTransfer.Users.DataContracts;
 using MediatR;
 using System.Collections.Generic;
 

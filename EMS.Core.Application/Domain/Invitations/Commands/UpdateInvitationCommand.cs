@@ -1,21 +1,22 @@
-﻿using MediatR;
+﻿using EMS.Core.Application.Domain.Enums;
+using EMS.Core.DataTransfer.Invitations.DataContracts;
+using EMS.Core.DataTransfer.Users.DataContracts;
+using MediatR;
+using System.Collections.Generic;
 
 namespace EMS.Core.Application.Domain.Invitations.Commands
 {
     public class UpdateInvitationCommand : IRequest<long>
     {
         public long EventId { get; set; }
+        public IEnumerable<VolunteerDetailsDataContract> VolunteerDetails { get; set; }
+        public InvitationStatus InvitationStatus { get; set; }
 
-        public string VolunteerId { get; set; }
-        public string VolunteerEmail { get; set; }
-        public bool Response { get; set; }
-
-        public UpdateInvitationCommand(long eventId, string volunteerId, string volunteerEmail, bool response)
+        public UpdateInvitationCommand(long eventId, IEnumerable<VolunteerDetailsDataContract> volunteerDetails, InvitationStatus invitationStatus)
         {
             EventId = eventId;
-            VolunteerId = volunteerId;
-            VolunteerEmail = volunteerEmail;
-            Response = response;
+            VolunteerDetails = volunteerDetails;
+            InvitationStatus = invitationStatus;
         }
     }
 }

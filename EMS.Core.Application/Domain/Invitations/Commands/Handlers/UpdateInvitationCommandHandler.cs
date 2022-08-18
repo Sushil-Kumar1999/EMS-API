@@ -1,6 +1,7 @@
 ﻿using EMS.Core.Application.Domain.Enums;
 using EMS.Core.Application.Infrastructure.Persistence;
 using EMS.Core.Application.Infrastructure.Persistence.Repositories;
+using EMS.Core.DataTransfer.Users.DataContracts;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,15 +21,10 @@ namespace EMS.Core.Application.Domain.Invitations.Commands.Handlers
 
         public async Task<long> Handle(UpdateInvitationCommand command, CancellationToken cancellationToken)
         {
-            Invitation invitation =  await _invitationRepository.GetByVolunteerIdAndEventIdAsync(command.VolunteerId, command.EventId);
-            
-            if (command.Response)
+            foreach (VolunteerDetailsDataContract volunteer in command.VolunteerDetails)
             {
-                invitation.InvitationStatus = InvitationStatus.Accepted;
-            }
-            else
-            {
-                invitation.InvitationStatus = InvitationStatus.Declined;
+                Invitation invitation =  await _invitationRepository.GetByVolunteerIdAndEventIdAsync(volunteer.VolunteerId, command.EventId);
+                invitation.InvitationStatus = command.InvitationStatus;
             }
             
             await _uow.CommitAsync();

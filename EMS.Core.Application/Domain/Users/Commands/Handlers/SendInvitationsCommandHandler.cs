@@ -4,6 +4,7 @@ using EMS.Core.Application.Domain.Users.Services;
 using EMS.Core.Application.Infrastructure.Persistence;
 using EMS.Core.Application.Infrastructure.Persistence.Repositories;
 using EMS.Core.DataTransfer.Invitations.DataContracts;
+using EMS.Core.DataTransfer.Users.DataContracts;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
