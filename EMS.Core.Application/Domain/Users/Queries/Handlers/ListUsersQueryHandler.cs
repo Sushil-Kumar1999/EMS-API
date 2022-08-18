@@ -1,9 +1,7 @@
-﻿using EMS.Core.Application.Infrastructure.Persistence;
-using EMS.Core.Application.Infrastructure.Persistence.Repositories;
+﻿using EMS.Core.Application.Infrastructure.Persistence.Repositories;
 using EMS.Core.DataTransfer.Users.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -24,13 +22,26 @@ namespace EMS.Core.Application.Domain.Users.Queries.Handlers
 
         public async Task<IEnumerable<UserDto>> Handle(ListUsersQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<ApplicationUser> users = 
-                request.Role == null ? await _userRepository.ListAsync() 
-                                     : await _userManager.GetUsersInRoleAsync(request.Role);
+            IEnumerable<UserDto> userDtos = null;
 
-            var userDtos = users.Select(x => new UserDto(x.Id, x.UserName, x.FirstName, x.LastName, x.Email, request.Role));
+            if (request.Role == null)
+            {
+                IEnumerable<ApplicationUser> users = await _userRepository.ListAsync();
+                userDtos = users.Select(x => new UserDto(x.Id, x.UserName, x.FirstName, x.LastName, x.Email, GetRole(x)));
+            }
+            else
+            {
+                IEnumerable<ApplicationUser> users =  await _userManager.GetUsersInRoleAsync(request.Role);
+                userDtos = users.Select(x => new UserDto(x.Id, x.UserName, x.FirstName, x.LastName, x.Email, request.Role));
+            }
 
             return userDtos;
+        }
+
+        private string GetRole(ApplicationUser user)
+        {
+            IEnumerable<string> roles = _userManager.GetRolesAsync(user).Result;
+            return roles.FirstOrDefault();
         }
     }
 }
