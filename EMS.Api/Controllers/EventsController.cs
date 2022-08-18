@@ -29,6 +29,17 @@ namespace EMS.Api.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("{eventId}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
+        public async Task<IActionResult> GetAsync([FromRoute] long eventId)
+        {
+            GetEventQuery query = new GetEventQuery(eventId);
+            EventDto @event = await _mediator.Send(query);
+
+            return Ok(@event);
+        }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
