@@ -23,6 +23,16 @@ namespace EMS.Api.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("{volunteerId}")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetAsync([FromRoute] string volunteerId)
+        {
+            GetVolunteerQuery query = new GetVolunteerQuery(volunteerId);
+            VolunteerDto user = await _mediator.Send(query);
+
+            return Ok(user);
+        }
+
         [HttpGet("find")]
         [Produces("application/json")]
         [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
