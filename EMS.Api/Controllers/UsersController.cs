@@ -44,7 +44,6 @@ namespace EMS.Api.Controllers
 
         [HttpGet]
         [Produces("application/json")]
-        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> ListAsync([FromQuery] string role)
         {
             var query = new ListUsersQuery(role);
