@@ -41,6 +41,8 @@
   <ItemGroup>
     <EmbeddedResource Include="..\EMS.Api\EmailTemplates\welcome-email-template.html" />
     <EmbeddedResource Include="..\EMS.Api\EmailTemplates\invitation-to-event.html" />
+    <EmbeddedResource Include="..\EMS.Api\EmailTemplates\confirmation-email-template.html" />
+    <EmbeddedResource Include="..\EMS.Api\EmailTemplates\rejection-email-template.html" />
   </ItemGroup>
 
 </Project>
