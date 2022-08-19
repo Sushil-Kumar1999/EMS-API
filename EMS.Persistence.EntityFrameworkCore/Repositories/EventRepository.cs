@@ -15,6 +15,13 @@ namespace EMS.Persistence.EntityFrameworkCore.Repositories
 
         }
 
+        public async Task<IEnumerable<Event>> GetAllByIds(IEnumerable<long> eventIds)
+        {
+            return await _dbSet.Where(x => eventIds.Contains(x.Id))
+                               .AsNoTracking()
+                               .ToListAsync();
+        }
+
         public override async Task<IEnumerable<Event>> ListAsync()
         {
             return await _dbSet.Where(x => x.Status == 1)

@@ -63,5 +63,53 @@ namespace EMS.Api.Controllers
 
             return Ok(eventId);
         }
+
+        [HttpGet("volunteer/{volunteerId}/invited")]
+        public async Task<IActionResult> FindEventsInvitedToAsync([FromRoute] string volunteerId)
+        {
+            var query = new FindEventsInInvitationQuery(volunteerId, 0);
+            IEnumerable<EventDto> events = await _mediator.Send(query);
+            return Ok(events);
+        }
+
+        [HttpGet("volunteer/{volunteerId}/unresponded")]
+        public async Task<IActionResult> FindEventsUnrespondedToAsync([FromRoute] string volunteerId)
+        {
+            var query = new FindEventsInInvitationQuery(volunteerId, InvitationStatus.Unresponded);
+            IEnumerable<EventDto> events = await _mediator.Send(query);
+            return Ok(events);
+        }
+
+        [HttpGet("volunteer/{volunteerId}/accepted")]
+        public async Task<IActionResult> FindEventsAcceptedAsync([FromRoute] string volunteerId)
+        {
+            var query = new FindEventsInInvitationQuery(volunteerId, InvitationStatus.Accepted);
+            IEnumerable<EventDto> events = await _mediator.Send(query);
+            return Ok(events);
+        }
+
+        [HttpGet("volunteer/{volunteerId}/declined")]
+        public async Task<IActionResult> FindEventsDeclinedAsync([FromRoute] string volunteerId)
+        {
+            var query = new FindEventsInInvitationQuery(volunteerId, InvitationStatus.Declined);
+            IEnumerable<EventDto> events = await _mediator.Send(query);
+            return Ok(events);
+        }
+
+        [HttpGet("volunteer/{volunteerId}/confirmed")]
+        public async Task<IActionResult> FindEventsConfirmedForAsync([FromRoute] string volunteerId)
+        {
+            var query = new FindEventsInInvitationQuery(volunteerId, InvitationStatus.Confirmed);
+            IEnumerable<EventDto> events = await _mediator.Send(query);
+            return Ok(events);
+        }
+
+        [HttpGet("volunteer/{volunteerId}/rejected")]
+        public async Task<IActionResult> FindEventsRejectedForAsync([FromRoute] string volunteerId)
+        {
+            var query = new FindEventsInInvitationQuery(volunteerId, InvitationStatus.Rejected);
+            IEnumerable<EventDto> events = await _mediator.Send(query);
+            return Ok(events);
+        }
     }
 }
