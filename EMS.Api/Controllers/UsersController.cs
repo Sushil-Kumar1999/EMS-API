@@ -51,5 +51,15 @@ namespace EMS.Api.Controllers
 
             return Ok(users);
         }
+
+        [HttpGet("{userId}")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetAsync([FromRoute] string userId)
+        {
+            GetUserQuery query = new GetUserQuery(userId);
+            UserDto user = await _mediator.Send(query);
+
+            return Ok(user);
+        }
     }
 }
