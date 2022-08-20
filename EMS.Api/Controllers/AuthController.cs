@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using EMS.Api.Infrastructure;
 
 namespace EMS.Api.Controllers
 {
@@ -22,7 +23,7 @@ namespace EMS.Api.Controllers
 
         [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LoginResponseDto))]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationErrorsResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationErrorsResponse))]
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequestDataContract request)
         {
             if (ModelState.IsValid)
