@@ -41,7 +41,8 @@ namespace EMS.Persistence.EntityFrameworkCore.Repositories
 
         public Task<bool> UpsertAsync(T entity)
         {
-            throw new NotImplementedException();
+             _context.Update(entity);
+            return Task.FromResult(true);
         }
     }
 }

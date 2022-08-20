@@ -57,6 +57,17 @@ namespace EMS.Api.Controllers
             return Ok(eventId);
         }
 
+        [HttpPatch("{eventId}")]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
+        public async Task<IActionResult> UpdateAsync([FromRoute] long eventId, UpdateEventRequestDataContract request)
+        {
+            UpdateEventCommand command = new UpdateEventCommand(eventId, request.Title, request.Description,
+                request.Location, request.StartDate, request.EndDate);
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+
         [HttpGet("volunteer/{volunteerId}/invited")]
         public async Task<IActionResult> FindEventsInvitedToAsync([FromRoute] string volunteerId)
         {
