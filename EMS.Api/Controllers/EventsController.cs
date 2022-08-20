@@ -70,7 +70,6 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("volunteer/{volunteerId}/invited")]
-        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindEventsInvitedToAsync([FromRoute] string volunteerId)
         {
             var query = new FindEventsInInvitationQuery(volunteerId, 0);
@@ -79,7 +78,6 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("volunteer/{volunteerId}/unresponded")]
-        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindEventsUnrespondedToAsync([FromRoute] string volunteerId)
         {
             var query = new FindEventsInInvitationQuery(volunteerId, InvitationStatus.Unresponded);
@@ -88,7 +86,6 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("volunteer/{volunteerId}/accepted")]
-        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindEventsAcceptedAsync([FromRoute] string volunteerId)
         {
             var query = new FindEventsInInvitationQuery(volunteerId, InvitationStatus.Accepted);
@@ -97,7 +94,6 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("volunteer/{volunteerId}/declined")]
-        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindEventsDeclinedAsync([FromRoute] string volunteerId)
         {
             var query = new FindEventsInInvitationQuery(volunteerId, InvitationStatus.Declined);
@@ -106,7 +102,6 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("volunteer/{volunteerId}/confirmed")]
-        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindEventsConfirmedForAsync([FromRoute] string volunteerId)
         {
             var query = new FindEventsInInvitationQuery(volunteerId, InvitationStatus.Confirmed);
@@ -115,7 +110,6 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("volunteer/{volunteerId}/rejected")]
-        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindEventsRejectedForAsync([FromRoute] string volunteerId)
         {
             var query = new FindEventsInInvitationQuery(volunteerId, InvitationStatus.Rejected);
