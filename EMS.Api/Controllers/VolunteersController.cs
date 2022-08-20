@@ -46,6 +46,7 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("event/{eventId}/invited")]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindInvitedVolunteersAsync([FromRoute] long eventId)
         {
             var query = new FindVolunteersInInvitationQuery(eventId, 0);
@@ -55,6 +56,7 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("event/{eventId}/unresponded")]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindUnrespondedVolunteersAsync([FromRoute] long eventId)
         {
             var query = new FindVolunteersInInvitationQuery(eventId, InvitationStatus.Unresponded) ;
@@ -64,6 +66,7 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("event/{eventId}/accepted")]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindAcceptedVolunteersAsync([FromRoute] long eventId)
         {
             var query = new FindVolunteersInInvitationQuery(eventId, InvitationStatus.Accepted);
@@ -73,6 +76,7 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("event/{eventId}/declined")]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindDeclinedVolunteersAsync([FromRoute] long eventId)
         {
             var query = new FindVolunteersInInvitationQuery(eventId, InvitationStatus.Declined);
@@ -82,6 +86,7 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("event/{eventId}/confirmed")]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindConfirmedVolunteersAsync([FromRoute] long eventId)
         {
             var query = new FindVolunteersInInvitationQuery(eventId, InvitationStatus.Confirmed);
@@ -91,6 +96,7 @@ namespace EMS.Api.Controllers
         }
 
         [HttpGet("event/{eventId}/rejected")]
+        [Authorize(Roles = nameof(UserRoles.Admin) + "," + nameof(UserRoles.Organiser))]
         public async Task<IActionResult> FindRejectedVolunteersAsync([FromRoute] long eventId)
         {
             var query = new FindVolunteersInInvitationQuery(eventId, InvitationStatus.Rejected);
