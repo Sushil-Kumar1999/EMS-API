@@ -66,6 +66,8 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
                 }
             }
 
+            await _uow.CommitAsync();
+
             return 0;
         }
 
@@ -80,7 +82,6 @@ namespace EMS.Core.Application.Domain.Users.Commands.Handlers
             };
 
             await _invitationRepository.AddAsync(invitation);
-            await _uow.CommitAsync();
        }
     }
 }
